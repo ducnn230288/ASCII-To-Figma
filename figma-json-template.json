@@ -1,0 +1,179 @@
+{
+  "layer": {
+    "name": "<Screen name>",
+    "type": "FRAME",
+    "width": 1536,
+    "height": 1024,
+    "fills": [{ "type": "SOLID", "color": { "r": 0.97, "g": 0.98, "b": 0.99 } }],
+    "reuse": { "colorVariable": "<Base/50>" },
+    "layout": {
+      "layoutMode": "HORIZONTAL",
+      "primaryAxisSizingMode": "AUTO",
+      "counterAxisSizingMode": "AUTO"
+    },
+    "children": [
+      {
+        "name": "<Semantic group A — e.g. Brand panel>",
+        "type": "FRAME",
+        "width": 707,
+        "height": 1024,
+        "fills": [{ "type": "SOLID", "color": { "r": 0, "g": 0.09, "b": 0.23 } }],
+        "reuse": {
+          "colorVariable": "<Base/950>",
+          "spacing": {
+            "paddingTop": "<Spacing/10>",
+            "paddingRight": "<Spacing/16>",
+            "paddingBottom": "<Spacing/10>",
+            "paddingLeft": "<Spacing/16>"
+          }
+        },
+        "layout": {
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "primaryAxisAlignItems": "SPACE_BETWEEN",
+          "paddingTop": 40,
+          "paddingRight": 64,
+          "paddingBottom": 40,
+          "paddingLeft": 64
+        },
+        "children": [
+          {
+            "name": "<Logo mark>",
+            "type": "INSTANCE",
+            "width": 200,
+            "height": 48,
+            "component": { "name": "<Component name from catalog>", "variant": "<Property=Value from variantOptions>" }
+          },
+          {
+            "name": "<Headline group>",
+            "type": "FRAME",
+            "fills": [],
+            "layout": {
+              "layoutMode": "VERTICAL",
+              "primaryAxisSizingMode": "AUTO",
+              "counterAxisSizingMode": "FIXED",
+              "itemSpacing": 32
+            },
+            "reuse": { "spacing": { "itemSpacing": "<Spacing/8>" } },
+            "children": [
+              {
+                "name": "<Headline text>",
+                "type": "TEXT",
+                "width": 579,
+                "reuse": { "textStyle": "<Desktop/DisplayL>" },
+                "text": {
+                  "characters": "<Headline copy from wireframe.md>",
+                  "fontSize": 48,
+                  "fontName": { "family": "<Font family from textStyle>", "style": "Bold" },
+                  "lineHeight": { "unit": "PIXELS", "value": 60 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP"
+                }
+              },
+              {
+                "name": "<Accent divider>",
+                "type": "LINE",
+                "width": 48,
+                "height": 0,
+                "strokes": [{ "type": "SOLID", "color": { "r": 1, "g": 0.78, "b": 0 } }],
+                "reuse": { "strokeStyle": "<Primary/500>" }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "<Semantic group B — e.g. Auth area>",
+        "type": "FRAME",
+        "width": 829,
+        "height": 1024,
+        "fills": [],
+        "layout": {
+          "layoutMode": "VERTICAL",
+          "primaryAxisSizingMode": "FIXED",
+          "counterAxisSizingMode": "FIXED",
+          "primaryAxisAlignItems": "CENTER",
+          "counterAxisAlignItems": "CENTER"
+        },
+        "children": [
+          {
+            "name": "<Card>",
+            "type": "FRAME",
+            "width": 680,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "strokes": [{ "type": "SOLID", "color": { "r": 0.9, "g": 0.9, "b": 0.9 } }],
+            "cornerRadius": 8,
+            "reuse": {
+              "colorVariable": "<Base/0>",
+              "strokeStyle": "<Base/200>",
+              "spacing": {
+                "itemSpacing": "<Spacing/6>",
+                "paddingTop": "<Spacing/14>",
+                "paddingRight": "<Spacing/16>",
+                "paddingBottom": "<Spacing/14>",
+                "paddingLeft": "<Spacing/16>"
+              }
+            },
+            "layout": {
+              "layoutMode": "VERTICAL",
+              "primaryAxisSizingMode": "AUTO",
+              "counterAxisSizingMode": "FIXED",
+              "itemSpacing": 24,
+              "paddingTop": 56,
+              "paddingRight": 64,
+              "paddingBottom": 56,
+              "paddingLeft": 64
+            },
+            "children": [
+              {
+                "name": "<Field group — label + input>",
+                "type": "FRAME",
+                "fills": [],
+                "layout": {
+                  "layoutMode": "VERTICAL",
+                  "primaryAxisSizingMode": "AUTO",
+                  "counterAxisSizingMode": "FIXED",
+                  "itemSpacing": 8
+                },
+                "reuse": { "spacing": { "itemSpacing": "<Spacing/2>" } },
+                "children": [
+                  {
+                    "name": "<Field label>",
+                    "type": "TEXT",
+                    "reuse": { "textStyle": "<Desktop/LabelM>" },
+                    "text": {
+                      "characters": "<Label copy from wireframe.md>",
+                      "fontSize": 14,
+                      "fontName": { "family": "<Font family from textStyle>", "style": "Semi Bold" },
+                      "lineHeight": { "unit": "PIXELS", "value": 20 },
+                      "textAlignHorizontal": "LEFT",
+                      "textAlignVertical": "TOP"
+                    }
+                  },
+                  {
+                    "name": "<Field input>",
+                    "type": "INSTANCE",
+                    "width": 579,
+                    "height": 44,
+                    "component": { "name": "<Input component from catalog>", "variant": "<State=Default, Size=Medium>" },
+                    "text": { "characters": "<Placeholder copy from wireframe.md>" }
+                  }
+                ]
+              },
+              {
+                "name": "<Primary action>",
+                "type": "INSTANCE",
+                "width": 579,
+                "height": 44,
+                "component": { "name": "<Button component from catalog>", "variant": "<Container=Primary, State=Default, Size=Medium>" },
+                "text": { "characters": "<Button label from wireframe.md>" }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

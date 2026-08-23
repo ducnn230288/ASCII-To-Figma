@@ -1,0 +1,779 @@
+﻿{
+  "layer": {
+    "name": "Đăng nhập — Freshness Camper",
+    "type": "FRAME",
+    "width": 1536,
+    "height": 1024,
+    "fills": [
+      { "type": "SOLID", "color": { "r": 0.9725490212440491, "g": 0.9803921580314636, "b": 0.9882352948188782 } }
+    ],
+    "reuse": { "colorVariable": "Base/50" },
+    "children": [
+      {
+        "name": "Khối nhận diện thương hiệu",
+        "type": "FRAME",
+        "width": 707,
+        "height": 1024,
+        "fills": [{ "type": "SOLID", "color": { "r": 0, "g": 0.09019608050584793, "b": 0.22745098173618317 } }],
+        "reuse": { "colorVariable": "Base/950" },
+        "children": [
+          {
+            "name": "Logo Freshness Camper",
+            "type": "INSTANCE",
+            "x": 64,
+            "y": 62,
+            "width": 330,
+            "height": 84,
+            "component": { "name": "logobrc_fg 1", "variant": "Property 1=Large" }
+          },
+          {
+            "name": "Tiêu đề marketing",
+            "type": "TEXT",
+            "x": 64,
+            "y": 204,
+            "width": 560,
+            "height": 120,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Display1" },
+            "text": {
+              "characters": "Nâng Tầm Trải Nghiệm,\nĐồng Hành Cùng Tự Do.",
+              "fontSize": 48,
+              "fontName": { "family": "Noto Sans JP", "style": "Bold" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 60 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "TITLE"
+            }
+          },
+          {
+            "name": "Điểm nhấn thương hiệu",
+            "type": "RECTANGLE",
+            "x": 64,
+            "y": 329,
+            "width": 52,
+            "height": 4,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.8666666746139526, "g": 0.6392157077789307, "b": 0.12156862765550613 }
+              }
+            ],
+            "reuse": { "colorVariable": "Primary/500" }
+          },
+          {
+            "name": "Mô tả hệ thống",
+            "type": "TEXT",
+            "x": 64,
+            "y": 358,
+            "width": 500,
+            "height": 48,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/BodyM" },
+            "text": {
+              "characters": "Hệ Thống Quản Trị Nội Dung Chính Thức\nCủa Freshness Camper Việt Nam",
+              "fontSize": 16,
+              "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 24 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "TITLE"
+            }
+          },
+          {
+            "name": "Icon bảo mật",
+            "type": "INSTANCE",
+            "x": 66,
+            "y": 447,
+            "width": 28,
+            "height": 28,
+            "component": { "name": "Size=M, icon=Shield-check" }
+          },
+          {
+            "name": "Bảo Mật Cao Cấp",
+            "type": "TEXT",
+            "x": 118,
+            "y": 438,
+            "width": 220,
+            "height": 28,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Heading3" },
+            "text": {
+              "characters": "Bảo Mật Cao Cấp",
+              "fontSize": 18,
+              "fontName": { "family": "Noto Sans JP", "style": "SemiBold" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 28 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "TITLE"
+            }
+          },
+          {
+            "name": "Mô tả bảo mật",
+            "type": "TEXT",
+            "x": 118,
+            "y": 469,
+            "width": 430,
+            "height": 40,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.7960784435272217, "g": 0.8352941274642944, "b": 0.8823529481887817 }
+              }
+            ],
+            "reuse": { "colorVariable": "Base/300", "textStyle": "Desktop/Label" },
+            "text": {
+              "characters": "Dữ liệu được bảo vệ theo tiêu chuẩn doanh nghiệp",
+              "fontSize": 14,
+              "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 20 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Icon quản trị",
+            "type": "INSTANCE",
+            "x": 66,
+            "y": 530,
+            "width": 28,
+            "height": 28,
+            "component": { "name": "Size=M, icon=users-round" }
+          },
+          {
+            "name": "Quản Trị Tập Trung",
+            "type": "TEXT",
+            "x": 118,
+            "y": 521,
+            "width": 240,
+            "height": 28,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Heading3" },
+            "text": {
+              "characters": "Quản Trị Tập Trung",
+              "fontSize": 18,
+              "fontName": { "family": "Noto Sans JP", "style": "SemiBold" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 28 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "TITLE"
+            }
+          },
+          {
+            "name": "Mô tả quản trị",
+            "type": "TEXT",
+            "x": 118,
+            "y": 552,
+            "width": 430,
+            "height": 40,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.7960784435272217, "g": 0.8352941274642944, "b": 0.8823529481887817 }
+              }
+            ],
+            "reuse": { "colorVariable": "Base/300", "textStyle": "Desktop/Label" },
+            "text": {
+              "characters": "Quản lý nội dung, sản phẩm và cấu hình website",
+              "fontSize": 14,
+              "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 20 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Icon ổn định",
+            "type": "INSTANCE",
+            "x": 66,
+            "y": 613,
+            "width": 28,
+            "height": 28,
+            "component": { "name": "Size=M, icon=chart-column-increasing" }
+          },
+          {
+            "name": "Ổn Định & Tin Cậy",
+            "type": "TEXT",
+            "x": 118,
+            "y": 604,
+            "width": 240,
+            "height": 28,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Heading3" },
+            "text": {
+              "characters": "Ổn Định & Tin Cậy",
+              "fontSize": 18,
+              "fontName": { "family": "Noto Sans JP", "style": "SemiBold" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 28 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "TITLE"
+            }
+          },
+          {
+            "name": "Mô tả ổn định",
+            "type": "TEXT",
+            "x": 118,
+            "y": 635,
+            "width": 430,
+            "height": 40,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.7960784435272217, "g": 0.8352941274642944, "b": 0.8823529481887817 }
+              }
+            ],
+            "reuse": { "colorVariable": "Base/300", "textStyle": "Desktop/Label" },
+            "text": {
+              "characters": "Hệ thống vận hành ổn định, hiệu suất tối ưu",
+              "fontSize": 14,
+              "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 20 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Bản quyền",
+            "type": "TEXT",
+            "x": 64,
+            "y": 915,
+            "width": 420,
+            "height": 20,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.7960784435272217, "g": 0.8352941274642944, "b": 0.8823529481887817 }
+              }
+            ],
+            "reuse": { "colorVariable": "Base/300", "textStyle": "Desktop/Caption" },
+            "text": {
+              "characters": "© 2026 Freshness Camper Việt Nam. All rights reserved.",
+              "fontSize": 12,
+              "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 16 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Chính sách bảo mật",
+            "type": "TEXT",
+            "x": 64,
+            "y": 950,
+            "width": 130,
+            "height": 20,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Caption" },
+            "text": {
+              "characters": "Chính sách bảo mật",
+              "fontSize": 12,
+              "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 16 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Phân cách footer",
+            "type": "TEXT",
+            "x": 202,
+            "y": 950,
+            "width": 12,
+            "height": 20,
+            "fills": [
+              {
+                "type": "SOLID",
+                "color": { "r": 0.5803921818733215, "g": 0.6392157077789307, "b": 0.7215686440467834 }
+              }
+            ],
+            "reuse": { "colorVariable": "Base/400", "textStyle": "Desktop/Caption" },
+            "text": {
+              "characters": "|",
+              "fontSize": 12,
+              "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 16 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          },
+          {
+            "name": "Điều khoản sử dụng",
+            "type": "TEXT",
+            "x": 222,
+            "y": 950,
+            "width": 140,
+            "height": 20,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "reuse": { "colorVariable": "Base/0", "textStyle": "Desktop/Caption" },
+            "text": {
+              "characters": "Điều khoản sử dụng",
+              "fontSize": 12,
+              "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+              "textAlignHorizontal": "LEFT",
+              "textAlignVertical": "TOP",
+              "lineHeight": { "unit": "PIXELS", "value": 16 },
+              "letterSpacing": { "unit": "PERCENT", "value": 0 },
+              "textCase": "ORIGINAL"
+            }
+          }
+        ]
+      },
+      {
+        "name": "Khối đăng nhập",
+        "type": "FRAME",
+        "x": 707,
+        "width": 829,
+        "height": 1024,
+        "fills": [
+          { "type": "SOLID", "color": { "r": 0.9725490212440491, "g": 0.9803921580314636, "b": 0.9882352948188782 } }
+        ],
+        "reuse": { "colorVariable": "Base/50" },
+        "children": [
+          {
+            "name": "Thẻ đăng nhập",
+            "type": "FRAME",
+            "x": 98,
+            "y": 40,
+            "width": 670,
+            "height": 864,
+            "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 1, "b": 1 } }],
+            "strokes": [
+              { "type": "SOLID", "color": { "r": 0.886274516582489, "g": 0.9098039269447327, "b": 0.9411764740943909 } }
+            ],
+            "cornerRadius": 10,
+            "reuse": { "colorVariable": "Base/0" },
+            "children": [
+              {
+                "name": "Bộ chọn ngôn ngữ",
+                "type": "INSTANCE",
+                "x": 470,
+                "y": 28,
+                "width": 142,
+                "height": 44,
+                "text": { "characters": "Tiếng Việt" },
+                "component": {
+                  "name": "icon + button + icon",
+                  "variant": "Container=Secondary, State=Default, Size=Medium"
+                }
+              },
+              {
+                "name": "Tiêu đề đăng nhập",
+                "type": "TEXT",
+                "x": 64,
+                "y": 96,
+                "width": 542,
+                "height": 36,
+                "fills": [{ "type": "SOLID", "color": { "r": 0, "g": 0.09019608050584793, "b": 0.22745098173618317 } }],
+                "reuse": { "colorVariable": "Base/950", "textStyle": "Desktop/Heading1" },
+                "text": {
+                  "characters": "Đăng Nhập",
+                  "fontSize": 30,
+                  "fontName": { "family": "Noto Sans JP", "style": "Bold" },
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 36 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "TITLE"
+                }
+              },
+              {
+                "name": "Phụ đề đăng nhập",
+                "type": "TEXT",
+                "x": 64,
+                "y": 138,
+                "width": 542,
+                "height": 40,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.3921568691730499, "g": 0.45490196347236633, "b": 0.545098066329956 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/500", "textStyle": "Desktop/Label" },
+                "text": {
+                  "characters": "Vui Lòng Đăng Nhập Để Tiếp Tục Sử Dụng Hệ Thống",
+                  "fontSize": 14,
+                  "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 20 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Nhãn tên đăng nhập",
+                "type": "TEXT",
+                "x": 64,
+                "y": 214,
+                "width": 542,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.11764705926179886, "g": 0.16078431904315948, "b": 0.23137255012989044 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/800", "textStyle": "Desktop/Label" },
+                "text": {
+                  "characters": "Tên đăng nhập hoặc Email",
+                  "fontSize": 14,
+                  "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 20 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Trường tên đăng nhập",
+                "type": "INSTANCE",
+                "x": 64,
+                "y": 244,
+                "width": 542,
+                "height": 48,
+                "text": { "characters": "Nhập tên đăng nhập hoặc email" },
+                "component": { "name": "Input" }
+              },
+              {
+                "name": "Nhãn mật khẩu",
+                "type": "TEXT",
+                "x": 64,
+                "y": 316,
+                "width": 542,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.11764705926179886, "g": 0.16078431904315948, "b": 0.23137255012989044 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/800", "textStyle": "Desktop/Label" },
+                "text": {
+                  "characters": "Mật khẩu",
+                  "fontSize": 14,
+                  "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 20 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Trường mật khẩu",
+                "type": "INSTANCE",
+                "x": 64,
+                "y": 346,
+                "width": 542,
+                "height": 48,
+                "text": { "characters": "Nhập mật khẩu" },
+                "component": { "name": "Input 1" }
+              },
+              {
+                "name": "Ghi nhớ đăng nhập",
+                "type": "INSTANCE",
+                "x": 64,
+                "y": 418,
+                "width": 24,
+                "height": 24,
+                "component": { "name": "Choice" }
+              },
+              {
+                "name": "Nhãn ghi nhớ đăng nhập",
+                "type": "TEXT",
+                "x": 98,
+                "y": 420,
+                "width": 170,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.20000000298023224, "g": 0.2549019753932953, "b": 0.3333333432674408 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/700", "textStyle": "Desktop/Label" },
+                "text": {
+                  "characters": "Ghi nhớ đăng nhập",
+                  "fontSize": 14,
+                  "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 20 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Quên mật khẩu",
+                "type": "TEXT",
+                "x": 456,
+                "y": 420,
+                "width": 150,
+                "height": 20,
+                "fills": [{ "type": "SOLID", "color": { "r": 0, "g": 0.09019608050584793, "b": 0.22745098173618317 } }],
+                "reuse": { "colorVariable": "Base/950", "textStyle": "Desktop/Label" },
+                "text": {
+                  "characters": "Quên mật khẩu?",
+                  "fontSize": 14,
+                  "fontName": { "family": "Noto Sans JP", "style": "Medium" },
+                  "textAlignHorizontal": "RIGHT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 20 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Nút đăng nhập",
+                "type": "INSTANCE",
+                "x": 64,
+                "y": 466,
+                "width": 542,
+                "height": 48,
+                "text": { "characters": "Đăng nhập" },
+                "component": { "name": "Button", "variant": "Container=Primary, State=Default, Size=Large" }
+              },
+              {
+                "name": "Đường phân cách trái",
+                "type": "LINE",
+                "x": 64,
+                "y": 557,
+                "width": 198,
+                "height": 1,
+                "strokes": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.886274516582489, "g": 0.9098039269447327, "b": 0.9411764740943909 }
+                  }
+                ]
+              },
+              {
+                "name": "Hoặc đăng nhập với",
+                "type": "TEXT",
+                "x": 276,
+                "y": 547,
+                "width": 118,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.3921568691730499, "g": 0.45490196347236633, "b": 0.545098066329956 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/500", "textStyle": "Desktop/Caption" },
+                "text": {
+                  "characters": "hoặc đăng nhập với",
+                  "fontSize": 12,
+                  "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+                  "textAlignHorizontal": "CENTER",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 16 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Đường phân cách phải",
+                "type": "LINE",
+                "x": 408,
+                "y": 557,
+                "width": 198,
+                "height": 1,
+                "strokes": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.886274516582489, "g": 0.9098039269447327, "b": 0.9411764740943909 }
+                  }
+                ]
+              },
+              {
+                "name": "Đăng nhập với Google",
+                "type": "INSTANCE",
+                "x": 64,
+                "y": 592,
+                "width": 542,
+                "height": 48,
+                "text": { "characters": "Đăng Nhập Với Google" },
+                "component": { "name": "Button", "variant": "Container=Secondary, State=Default, Size=Large" }
+              },
+              {
+                "name": "Cảnh báo bảo mật",
+                "type": "FRAME",
+                "x": 64,
+                "y": 664,
+                "width": 542,
+                "height": 64,
+                "fills": [{ "type": "SOLID", "color": { "r": 1, "g": 0.9843137264251709, "b": 0.9215686321258545 } }],
+                "strokes": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.9921568632125854, "g": 0.9019607901573181, "b": 0.5411764979362488 }
+                  }
+                ],
+                "cornerRadius": 8,
+                "reuse": { "colorVariable": "Warning/50" },
+                "children": [
+                  {
+                    "name": "Biểu tượng cảnh báo bảo mật",
+                    "type": "INSTANCE",
+                    "x": 16,
+                    "y": 18,
+                    "width": 28,
+                    "height": 28,
+                    "component": { "name": "Size=M, icon=Shield-check" }
+                  },
+                  {
+                    "name": "Nội dung cảnh báo bảo mật",
+                    "type": "TEXT",
+                    "x": 58,
+                    "y": 12,
+                    "width": 462,
+                    "height": 40,
+                    "fills": [
+                      {
+                        "type": "SOLID",
+                        "color": { "r": 0.27843138575553894, "g": 0.3333333432674408, "b": 0.4117647111415863 }
+                      }
+                    ],
+                    "reuse": { "colorVariable": "Base/600", "textStyle": "Desktop/Caption" },
+                    "text": {
+                      "characters": "Vì lý do bảo mật, vui lòng đăng xuất sau khi sử dụng trên thiết bị dùng chung.",
+                      "fontSize": 12,
+                      "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+                      "textAlignHorizontal": "LEFT",
+                      "textAlignVertical": "TOP",
+                      "lineHeight": { "unit": "PIXELS", "value": 16 },
+                      "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                      "textCase": "ORIGINAL"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "Hỗ trợ đăng nhập",
+            "type": "FRAME",
+            "x": 171,
+            "y": 936,
+            "width": 486,
+            "height": 28,
+            "fills": [],
+            "children": [
+              {
+                "name": "Biểu tượng hỗ trợ",
+                "type": "INSTANCE",
+                "width": 28,
+                "height": 28,
+                "component": { "name": "Size=M, icon=headphones" }
+              },
+              {
+                "name": "Cần hỗ trợ đăng nhập",
+                "type": "TEXT",
+                "x": 38,
+                "y": 4,
+                "width": 158,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.27843138575553894, "g": 0.3333333432674408, "b": 0.4117647111415863 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/600", "textStyle": "Desktop/Caption" },
+                "text": {
+                  "characters": "Cần hỗ trợ đăng nhập?",
+                  "fontSize": 12,
+                  "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 16 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Email hỗ trợ",
+                "type": "TEXT",
+                "x": 210,
+                "y": 4,
+                "width": 164,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.062745101749897, "g": 0.13725490868091583, "b": 0.24705882370471954 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/900", "textStyle": "Desktop/Caption" },
+                "text": {
+                  "characters": "support@freshnesscamper.vn",
+                  "fontSize": 12,
+                  "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 16 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              },
+              {
+                "name": "Biểu tượng điện thoại",
+                "type": "INSTANCE",
+                "x": 386,
+                "width": 28,
+                "height": 28,
+                "component": { "name": "Size=M, icon=phone" }
+              },
+              {
+                "name": "Số điện thoại hỗ trợ",
+                "type": "TEXT",
+                "x": 424,
+                "y": 4,
+                "width": 112,
+                "height": 20,
+                "fills": [
+                  {
+                    "type": "SOLID",
+                    "color": { "r": 0.062745101749897, "g": 0.13725490868091583, "b": 0.24705882370471954 }
+                  }
+                ],
+                "reuse": { "colorVariable": "Base/900", "textStyle": "Desktop/Caption" },
+                "text": {
+                  "characters": "024 7100 6699",
+                  "fontSize": 12,
+                  "fontName": { "family": "Noto Sans JP", "style": "Regular" },
+                  "textAlignHorizontal": "LEFT",
+                  "textAlignVertical": "TOP",
+                  "lineHeight": { "unit": "PIXELS", "value": 16 },
+                  "letterSpacing": { "unit": "PERCENT", "value": 0 },
+                  "textCase": "ORIGINAL"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
+
