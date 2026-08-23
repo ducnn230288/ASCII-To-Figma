@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      body {
+        margin: 16px;
+        color: var(--figma-color-text);
+        font:
+          12px Inter,
+          sans-serif;
+      }
+      h2 {
+        margin: 0 0 8px;
+        font-size: 16px;
+      }
+      p {
+        line-height: 1.5;
+      }
+      .file-input {
+        box-sizing: border-box;
+        width: 100%;
+        padding: 8px;
+        border: 1px solid var(--figma-color-border);
+        border-radius: 4px;
+        background: var(--figma-color-bg);
+        color: inherit;
+      }
+      .json-input {
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 150px;
+        margin-top: 6px;
+        padding: 8px;
+        resize: vertical;
+        border: 1px solid var(--figma-color-border);
+        border-radius: 4px;
+        background: var(--figma-color-bg);
+        color: inherit;
+        font: 11px/1.4 monospace;
+      }
+      .json-input.invalid {
+        border-color: var(--figma-color-border-danger);
+      }
+      .wireframe-input {
+        min-height: 120px;
+        font: 11px/1.4 monospace;
+      }
+      .input-label {
+        display: block;
+        margin-top: 12px;
+        font-weight: 600;
+      }
+      .hint {
+        margin: 4px 0 0;
+        color: var(--figma-color-text-secondary);
+      }
+      pre {
+        margin: 10px 0 0;
+        padding: 8px;
+        border-radius: 4px;
+        background: var(--figma-color-bg-secondary);
+        overflow: auto;
+        font: 11px/1.4 monospace;
+      }
+      .tabs {
+        display: flex;
+        gap: 4px;
+        margin: 14px 0 4px;
+        border-bottom: 1px solid var(--figma-color-border);
+      }
+      .tab {
+        border-radius: 4px 4px 0 0;
+        color: var(--figma-color-text-secondary);
+        background: transparent;
+      }
+      .tab[aria-selected="true"] {
+        color: var(--figma-color-text);
+        background: var(--figma-color-bg-secondary);
+      }
+      .tab-panel[hidden] {
+        display: none;
+      }
+      .export-action {
+        margin-top: 16px;
+      }
+      .export-action:first-of-type {
+        margin-top: 12px;
+      }
+      .export-action p {
+        margin: 4px 0 0;
+        color: var(--figma-color-text-secondary);
+      }
+      .actions {
+        display: flex;
+        gap: 8px;
+        margin-top: 10px;
+      }
+      button {
+        border: 0;
+        border-radius: 4px;
+        padding: 8px 12px;
+        color: white;
+        background: var(--figma-color-bg-brand);
+        cursor: pointer;
+      }
+      button.secondary {
+        background: var(--figma-color-bg-secondary);
+        color: var(--figma-color-text);
+      }
+      button:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+      #status {
+        min-height: 18px;
+        margin-top: 10px;
+        color: var(--figma-color-text-secondary);
+      }
+    </style>
+  </head>
+  <body>
+    <p class="plugin-summary">
+      Turn wireframes into editable Figma layers with AI, or import JSON manually. Both workflows reuse the components,
+      styles, and tokens in the current file whenever possible.
+    </p>
+    <h2>Wireframe ASCII → Figma</h2>
+    <div class="tabs" role="tablist" aria-label="Import mode">
+      <button class="tab" type="button" role="tab" id="tab-ai" aria-controls="panel-ai" aria-selected="true">
+        AI Wireframe
+      </button>
+      <button class="tab" type="button" role="tab" id="tab-manual" aria-controls="panel-manual" aria-selected="false">
+        Manual JSON
+      </button>
+      <button class="tab" type="button" role="tab" id="tab-export" aria-controls="panel-export" aria-selected="false">
+        Export
+      </button>
+    </div>
+    <section class="tab-panel" id="panel-ai" role="tabpanel" aria-labelledby="tab-ai">
+      <p>
+        Convert a Markdown or ASCII wireframe into JSON and import it directly. AI reuses the components, styles, and
+        tokens available in the current Figma file.
+      </p>
+      <label class="input-label" for="api-key">OpenAI API key (only used for this session)</label>
+      <input id="api-key" class="file-input" type="password" autocomplete="off" placeholder="sk-..." />
+      <label class="input-label" for="wireframe-input">Paste wireframe</label>
+      <textarea
+        id="wireframe-input"
+        class="json-input wireframe-input"
+        spellcheck="false"
+        placeholder="Paste Markdown / ASCII wireframe here..."
+      ></textarea>
+      <p class="hint">
+        The current Figma component and token catalog is included automatically. Your key is not saved in the document
+        or plugin storage.
+      </p>
+      <div class="actions">
+        <button id="generate" disabled>Generate &amp; import with Terra</button>
+      </div>
+    </section>
+    <section class="tab-panel" id="panel-manual" role="tabpanel" aria-labelledby="tab-manual" hidden>
+      <p>
+        Import existing JSON when you want full control of the structure. You can also export the catalog or selected
+        layer as reference data.
+      </p>
+      <label class="input-label" for="json-file">JSON file (optional)</label>
+      <input id="json-file" class="file-input" type="file" accept="application/json,.json" />
+      <label class="input-label" for="json-input">Or paste JSON</label>
+      <textarea
+        id="json-input"
+        class="json-input"
+        spellcheck="false"
+        placeholder="Paste JSON here to validate and format it automatically."
+      ></textarea>
+      <p class="hint">A selected file is imported first. If no file is selected, the pasted JSON is imported.</p>
+      <pre>
+{
+  "items": [
+    { "name": "Button", "variant": "Size=Medium, State=Default", "label": "Continue", "x": 0, "y": 0 },
+    { "name": "Avatar", "x": 240, "y": 0 },
+    { "name": "Text/Heading", "label": "Page title", "row": 1, "column": 0 }
+  ]
+}</pre
+      >
+      <div class="actions">
+        <button id="import" disabled>Import JSON</button>
+      </div>
+    </section>
+    <section class="tab-panel" id="panel-export" role="tabpanel" aria-labelledby="tab-export" hidden>
+      <p>Export reference data from the current Figma file for review or use in another workflow.</p>
+      <div class="export-action">
+        <button id="export">Export catalog</button>
+        <p>Downloads local components, component properties and variants, color and spacing tokens, and text styles.</p>
+      </div>
+      <div class="export-action">
+        <button id="export-selection" disabled>Export selected layer</button>
+        <p>Downloads the currently selected layer and all descendants, including layout and visual properties.</p>
+      </div>
+    </section>
+    <div class="actions"><button id="cancel" class="secondary">Close</button></div>
+    <div id="status"></div>
+    <script>
+      document.querySelector("h2").textContent = "Wireframe ASCII → Figma";
+      const wireframePrompt =
+        /* AI_WIREFRAME_PROMPT_START */
+      "# Wireframe to Figma-import JSON\n\nYou are a UI designer and compiler for the **JSON To Figma** plugin.\n\nThis text is embedded verbatim as the `instructions` sent to `gpt-5.6-terra` when the user clicks **Generate & import with Terra** in the **JSON To Figma** plugin (see `code.ts` → `generateWireframeJson`, built into `ui.html` by `npm run build`). Alongside it, the plugin sends one `input` string made of the wireframe text pasted into **Paste wireframe** followed by the current file's design-system catalog (exported live, same shape as `figma-system-design.json`). There is no mechanism to attach any other file to that request — every schema rule and structural example the model needs must live in this document itself, not in an external file.\n\n- Wireframe content: the text pasted into **Paste wireframe** (Markdown/ASCII), equivalent to `wireframe.md` when testing manually.\n- Design-system catalog: the `FIGMA DESIGN SYSTEM CATALOG` section of `input`, always a fresh export of the currently open Figma file (same shape as `figma-system-design.json`), not a static file.\n- `figma-json-template.json` at the repo root is a **reference for editors of this prompt only** — it is never sent to the model and the model has no access to it. Any structural example it needs must be copied inline into the \"Full example\" section below.\n\nThe model never receives and must never assume the content of `figma-selected-layer.json` (a sample export with real layers, IDs, and content from a different screen) — never invent or infer values from it; rely only on the schema in this document.\n\nReturn **only one valid JSON object**: no Markdown fences, prose, HTML, CSS, Markdown, ASCII art, or `items` wrapper. The result must import directly in the plugin.\n\n## Required output\n\nReturn exactly:\n\n```json\n{ \"layer\": {} }\n```\n\n`layer` is one root `FRAME` at canvas origin. Omit its `x` and `y` when both are zero. Do not output metadata (`version`, `format`, `layoutStrategy`, `exportedAt`, `document`, `page`, `id`, `blendMode`, `autoLayout`, `componentProperties`) or default values.\n\nUse only fields supported by the importer. Every node needs a meaningful `name` and `type`.\n\n## Reuse priority\n\nUse the design-system catalog exactly as supplied, in this order:\n\n1. Create an `INSTANCE` for a semantically matching component or component set.\n2. For custom layers, bind matching local Color Styles, Color Variables, Text Styles, and Spacing Variables with `reuse`.\n3. Create only `FRAME`, `TEXT`, `RECTANGLE`, `ELLIPSE`, or `LINE` when no suitable resource exists.\n\nNever invent component names, property values, styles, or tokens. Component, style, and token names must match the catalog exactly; each variant value must exist in the matching Component Set's `componentPropertyDefinitions` entry of type `VARIANT`, under `variantOptions`. Do not rebuild buttons, inputs, avatars, badges, cards, icons, navigation, or other patterns when a matching component exists.\n\n### Fidelity to the wireframe\n\nThe goal is a screen that matches a real hand-built Figma file — structure, spacing, and typography — not just correct content:\n\n- When the wireframe gives concrete measurements (%, px, card size, padding, radius, font-size/line-height…), use them exactly for `x`/`y`/`width`/`height`/padding/`cornerRadius`; convert percentages of the viewport to precise pixels rather than approximating.\n- Mirror how a real Figma file nests layers: use a separate wrapper `FRAME` per semantic group (e.g. brand panel, login card, header row with the language selector, form-field group, secondary actions row, footer/support block) instead of flattening everything into one `FRAME` full of loose `TEXT`/`INSTANCE` siblings.\n- Attach `reuse` (colorVariable/textStyle/spacing) at **every** applicable level of custom layers, including intermediate wrappers, not only the root — matching how a real export repeats `reuse` bindings at many nesting depths.\n- When the wireframe specifies a typography scale (e.g. \"text-3xl/30px/36px, font-bold\" or \"text-sm/14px/20px\"), pick the catalog `textStyle` with the closest matching metrics and copy its `fontSize`/`lineHeight`/weight into `text` as fallback.\n- If the wireframe lists multiple interaction states (default/focus/error/disabled…), build only the `Default` state for a static screen unless multiple variants are explicitly requested; when they are, pick the matching `State` value from the component's `variantOptions` rather than faking the state with extra layers.\n\n### Component catalog structure\n\n`components` contains only standalone Components and Component Sets, as in Figma Assets. Entries with editable properties include `componentPropertyDefinitions`, which describes their types and defaults. For a Component Set, each definition with `type: \"VARIANT\"` lists its valid values in `variantOptions`; it has no `properties` map or `variants` array, and its child variants are not catalog entries. Use the definitions as reference only; do not place `componentProperties` in generated instance JSON.\n\n```json\n{\n  \"name\": \"Button\",\n  \"kind\": \"COMPONENT_SET\",\n  \"componentPropertyDefinitions\": {\n    \"Container\": { \"type\": \"VARIANT\", \"defaultValue\": \"Primary\", \"variantOptions\": [\"Primary\", \"Secondary\", \"Destructive\"] },\n    \"State\": { \"type\": \"VARIANT\", \"defaultValue\": \"Default\", \"variantOptions\": [\"Default\", \"Hover\", \"Pressed\"] },\n    \"Size\": { \"type\": \"VARIANT\", \"defaultValue\": \"Medium\", \"variantOptions\": [\"Large\", \"Medium\", \"Small\"] }\n  }\n}\n```\n\n## Instances\n\n```json\n{\n  \"name\": \"Continue button\",\n  \"type\": \"INSTANCE\",\n  \"x\": 32,\n  \"y\": 240,\n  \"width\": 160,\n  \"height\": 40,\n  \"text\": { \"characters\": \"Continue\" },\n  \"component\": {\n    \"name\": \"Button\",\n    \"variant\": \"Size=Medium, State=Default\"\n  }\n}\n```\n\n- `component.name` must exactly match `components[].name`.\n- Add `component.variant` only for a `COMPONENT_SET`. Select valid values from the `VARIANT` definitions' `variantOptions` and write them as `Property name=Value, ...`, for example `Container=Primary, State=Default, Size=Medium`. Omit it for a `COMPONENT`.\n- `name` describes the screen layer; component lookup uses only `component.name`.\n- Never add `children`, `fills`, `strokes`, or `cornerRadius` to an `INSTANCE`.\n- Use `text: { \"characters\": \"...\" }` to replace an instance's primary text.\n\n## Custom layers and tokens\n\nFor custom layers, use `reuse` whenever suitable:\n\n```json\n{\n  \"reuse\": {\n    \"colorVariable\": \"Base/0\",\n    \"textStyle\": \"Desktop/BodyM\",\n    \"spacing\": {\n      \"itemSpacing\": \"Spacing/2\",\n      \"paddingTop\": \"Spacing/4\",\n      \"paddingRight\": \"Spacing/4\",\n      \"paddingBottom\": \"Spacing/4\",\n      \"paddingLeft\": \"Spacing/4\"\n    }\n  }\n}\n```\n\n- `fillStyle` and `strokeStyle` use `tokens.colors.styles[].name`.\n- `colorVariable` uses `tokens.colors.variables[].name`.\n- `textStyle` uses `tokens.typography[].name`; also copy its typography to `text` as fallback.\n- Spacing values use `tokens.spacing[].name`, and only `itemSpacing` and `paddingTop`, `paddingRight`, `paddingBottom`, `paddingLeft` keys on a `FRAME`.\n\n## Layer rules\n\n- Child coordinates are pixels relative to their parent. Width and height are positive numbers.\n- Omit `x`/`y` when zero, width/height when 100, and default `visible`, `locked`, `opacity`, `rotation`, and `cornerRadius` values.\n- Custom `FRAME` or `RECTANGLE` without a background must have `\"fills\": []`; otherwise use only `SOLID` paints with RGB values in `0..1`.\n- Do not use images, `VECTOR`, `BOOLEAN_OPERATION`, gradients, or effects. Use an icon component when available; otherwise use the minimum simple shape only when required.\n- A `FRAME` uses `layout` only for Auto Layout and `children` only when it has children. A `TEXT` must have `text` and cannot have `layout` or `children`. `RECTANGLE`, `ELLIPSE`, and `LINE` cannot have `layout`, `text`, or `children`.\n\n## Auto Layout\n\n```json\n{\n  \"layout\": {\n    \"layoutMode\": \"VERTICAL\",\n    \"primaryAxisSizingMode\": \"AUTO\",\n    \"counterAxisSizingMode\": \"FIXED\",\n    \"itemSpacing\": 16,\n    \"paddingTop\": 24,\n    \"paddingRight\": 24,\n    \"paddingBottom\": 24,\n    \"paddingLeft\": 24\n  }\n}\n```\n\nSupported keys: `layoutMode`, `primaryAxisSizingMode`, `counterAxisSizingMode`, `primaryAxisAlignItems`, `counterAxisAlignItems`, `itemSpacing`, and the four padding keys. Do not output `layout.mode`, Grid, wrap, constraints, or any other layout keys. Omit MIN alignment and zero gap/padding values. Use `VERTICAL` or `HORIZONTAL` stacks; use `AUTO` for Hug and `FIXED` when the wireframe needs a fixed size.\n\n## Text\n\nEvery `TEXT` has a `text` object, for example:\n\n```json\n{\n  \"text\": {\n    \"characters\": \"Visible copy\",\n    \"fontSize\": 14,\n    \"fontName\": { \"family\": \"Inter\", \"style\": \"Regular\" },\n    \"textAlignHorizontal\": \"LEFT\",\n    \"textAlignVertical\": \"TOP\",\n    \"lineHeight\": { \"unit\": \"PIXELS\", \"value\": 20 },\n    \"letterSpacing\": { \"unit\": \"PERCENT\", \"value\": 0 },\n    \"textCase\": \"ORIGINAL\"\n  }\n}\n```\n\nUse the selected catalog Text Style's font and metrics. If none fits, use Inter (`Regular`, `Medium`, `Semi Bold`, or `Bold`). Never output `textStyleId`.\n\n## Full example (structure only, not content)\n\nEvery `name`, `characters`, size, `component.name`, `variant`, and token name below is a **placeholder** wrapped in `<...>`; this illustrates nesting depth, where `reuse` attaches, and when to use `INSTANCE` vs. a custom layer — it is not a rigid mold. Always follow the actual wireframe's structure, even where it differs from this example.\n\n```json\n{\n  \"layer\": {\n    \"name\": \"<Screen name>\",\n    \"type\": \"FRAME\",\n    \"width\": 1536,\n    \"height\": 1024,\n    \"fills\": [{ \"type\": \"SOLID\", \"color\": { \"r\": 0.97, \"g\": 0.98, \"b\": 0.99 } }],\n    \"reuse\": { \"colorVariable\": \"<Base/50>\" },\n    \"layout\": { \"layoutMode\": \"HORIZONTAL\", \"primaryAxisSizingMode\": \"AUTO\", \"counterAxisSizingMode\": \"AUTO\" },\n    \"children\": [\n      {\n        \"name\": \"<Semantic group A — e.g. brand panel>\",\n        \"type\": \"FRAME\",\n        \"width\": 707,\n        \"height\": 1024,\n        \"fills\": [{ \"type\": \"SOLID\", \"color\": { \"r\": 0, \"g\": 0.09, \"b\": 0.23 } }],\n        \"reuse\": {\n          \"colorVariable\": \"<Base/950>\",\n          \"spacing\": { \"paddingTop\": \"<Spacing/10>\", \"paddingRight\": \"<Spacing/16>\", \"paddingBottom\": \"<Spacing/10>\", \"paddingLeft\": \"<Spacing/16>\" }\n        },\n        \"layout\": { \"layoutMode\": \"VERTICAL\", \"primaryAxisSizingMode\": \"FIXED\", \"counterAxisSizingMode\": \"FIXED\", \"primaryAxisAlignItems\": \"SPACE_BETWEEN\", \"paddingTop\": 40, \"paddingRight\": 64, \"paddingBottom\": 40, \"paddingLeft\": 64 },\n        \"children\": [\n          {\n            \"name\": \"<Logo>\",\n            \"type\": \"INSTANCE\",\n            \"width\": 200,\n            \"height\": 48,\n            \"component\": { \"name\": \"<Component name from catalog>\", \"variant\": \"<Property=Value from variantOptions>\" }\n          },\n          {\n            \"name\": \"<Headline group>\",\n            \"type\": \"FRAME\",\n            \"fills\": [],\n            \"layout\": { \"layoutMode\": \"VERTICAL\", \"primaryAxisSizingMode\": \"AUTO\", \"counterAxisSizingMode\": \"FIXED\", \"itemSpacing\": 32 },\n            \"reuse\": { \"spacing\": { \"itemSpacing\": \"<Spacing/8>\" } },\n            \"children\": [\n              {\n                \"name\": \"<Headline>\",\n                \"type\": \"TEXT\",\n                \"width\": 579,\n                \"reuse\": { \"textStyle\": \"<Desktop/DisplayL>\" },\n                \"text\": { \"characters\": \"<Headline copy from the wireframe>\", \"fontSize\": 48, \"fontName\": { \"family\": \"<Font from textStyle>\", \"style\": \"Bold\" }, \"lineHeight\": { \"unit\": \"PIXELS\", \"value\": 60 }, \"letterSpacing\": { \"unit\": \"PERCENT\", \"value\": 0 }, \"textAlignHorizontal\": \"LEFT\", \"textAlignVertical\": \"TOP\" }\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"name\": \"<Semantic group B — e.g. login card>\",\n        \"type\": \"FRAME\",\n        \"width\": 680,\n        \"fills\": [{ \"type\": \"SOLID\", \"color\": { \"r\": 1, \"g\": 1, \"b\": 1 } }],\n        \"strokes\": [{ \"type\": \"SOLID\", \"color\": { \"r\": 0.9, \"g\": 0.9, \"b\": 0.9 } }],\n        \"cornerRadius\": 8,\n        \"reuse\": {\n          \"colorVariable\": \"<Base/0>\",\n          \"strokeStyle\": \"<Base/200>\",\n          \"spacing\": { \"itemSpacing\": \"<Spacing/6>\", \"paddingTop\": \"<Spacing/14>\", \"paddingRight\": \"<Spacing/16>\", \"paddingBottom\": \"<Spacing/14>\", \"paddingLeft\": \"<Spacing/16>\" }\n        },\n        \"layout\": { \"layoutMode\": \"VERTICAL\", \"primaryAxisSizingMode\": \"AUTO\", \"counterAxisSizingMode\": \"FIXED\", \"itemSpacing\": 24, \"paddingTop\": 56, \"paddingRight\": 64, \"paddingBottom\": 56, \"paddingLeft\": 64 },\n        \"children\": [\n          {\n            \"name\": \"<Field group — label + input>\",\n            \"type\": \"FRAME\",\n            \"fills\": [],\n            \"layout\": { \"layoutMode\": \"VERTICAL\", \"primaryAxisSizingMode\": \"AUTO\", \"counterAxisSizingMode\": \"FIXED\", \"itemSpacing\": 8 },\n            \"reuse\": { \"spacing\": { \"itemSpacing\": \"<Spacing/2>\" } },\n            \"children\": [\n              {\n                \"name\": \"<Field label>\",\n                \"type\": \"TEXT\",\n                \"reuse\": { \"textStyle\": \"<Desktop/LabelM>\" },\n                \"text\": { \"characters\": \"<Label copy from the wireframe>\", \"fontSize\": 14, \"fontName\": { \"family\": \"<Font from textStyle>\", \"style\": \"Semi Bold\" }, \"lineHeight\": { \"unit\": \"PIXELS\", \"value\": 20 }, \"textAlignHorizontal\": \"LEFT\", \"textAlignVertical\": \"TOP\" }\n              },\n              {\n                \"name\": \"<Field input>\",\n                \"type\": \"INSTANCE\",\n                \"width\": 579,\n                \"height\": 44,\n                \"component\": { \"name\": \"<Input component from catalog>\", \"variant\": \"<State=Default, Size=Medium>\" },\n                \"text\": { \"characters\": \"<Placeholder copy from the wireframe>\" }\n              }\n            ]\n          },\n          {\n            \"name\": \"<Primary action>\",\n            \"type\": \"INSTANCE\",\n            \"width\": 579,\n            \"height\": 44,\n            \"component\": { \"name\": \"<Button component from catalog>\", \"variant\": \"<Container=Primary, State=Default, Size=Medium>\" },\n            \"text\": { \"characters\": \"<Button label from the wireframe>\" }\n          }\n        ]\n      }\n    ]\n  }\n}\n```\n\nBefore responding, verify that the JSON parses, contains only the `layer` wrapper, has a root `FRAME`, uses only valid catalog references, and contains no text outside the JSON. Also verify that measurements from the wireframe were converted precisely (no rounding guesses), that the hierarchy has a dedicated wrapper `FRAME` per semantic group, that `reuse` is attached at every applicable nesting level, not only the root, and that no `<...>` placeholder from the \"Full example\" section remains unreplaced.\n"
+      /* AI_WIREFRAME_PROMPT_END */ const status = document.getElementById("status");
+      const apiKeyInput = document.getElementById("api-key");
+      const wireframeInput = document.getElementById("wireframe-input");
+      const generateButton = document.getElementById("generate");
+      const fileInput = document.getElementById("json-file");
+      const jsonInput = document.getElementById("json-input");
+      const importButton = document.getElementById("import");
+      const exportSelectionButton = document.getElementById("export-selection");
+      const tabs = Array.from(document.querySelectorAll("[role=tab]"));
+      let hasValidPastedJson = false;
+      const send = (message) => parent.postMessage({ pluginMessage: message }, "*");
+      send({ type: "ui-ready" });
+      function selectTab(tabId) {
+        tabs.forEach((tab) => {
+          const selected = tab.id === tabId;
+          tab.setAttribute("aria-selected", String(selected));
+          document.getElementById(tab.getAttribute("aria-controls")).hidden = !selected;
+        });
+      }
+      tabs.forEach((tab) => tab.addEventListener("click", () => selectTab(tab.id)));
+      function updateImportButton() {
+        importButton.disabled = !fileInput.files.length && !hasValidPastedJson;
+      }
+      function updateGenerateButton() {
+        generateButton.disabled = !apiKeyInput.value.trim() || !wireframeInput.value.trim();
+      }
+      function validateAndFormatPastedJson() {
+        const source = jsonInput.value.trim();
+        if (!source) {
+          jsonInput.classList.remove("invalid");
+          hasValidPastedJson = false;
+          updateImportButton();
+          return null;
+        }
+        try {
+          const data = JSON.parse(source);
+          jsonInput.value = JSON.stringify(data, null, 2);
+          jsonInput.classList.remove("invalid");
+          status.textContent = "Pasted JSON is valid and formatted.";
+          hasValidPastedJson = true;
+          updateImportButton();
+          return data;
+        } catch (error) {
+          jsonInput.classList.add("invalid");
+          status.textContent = `Invalid pasted JSON: ${error.message}`;
+          hasValidPastedJson = false;
+          updateImportButton();
+          return null;
+        }
+      }
+      jsonInput.addEventListener("input", validateAndFormatPastedJson);
+      fileInput.addEventListener("change", () => updateImportButton());
+      apiKeyInput.addEventListener("input", updateGenerateButton);
+      wireframeInput.addEventListener("input", updateGenerateButton);
+      function downloadJson(data, filename) {
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+      document.getElementById("export").onclick = () => {
+        status.textContent = "Scanning components and tokens…";
+        send({ type: "export-catalog" });
+      };
+      exportSelectionButton.onclick = () => {
+        status.textContent = "Exporting selected layer…";
+        send({ type: "export-selection" });
+      };
+      generateButton.onclick = () => {
+        generateButton.disabled = true;
+        status.textContent = "Reading Figma catalog and generating import JSON with GPT-5.6 Terra…";
+        send({
+          type: "generate-wireframe",
+          apiKey: apiKeyInput.value,
+          wireframe: wireframeInput.value,
+          prompt: wireframePrompt,
+        });
+      };
+      importButton.onclick = async () => {
+        const file = fileInput.files[0];
+        try {
+          if (!file) {
+            const data = validateAndFormatPastedJson();
+            if (data === null) {
+              if (!jsonInput.value.trim()) status.textContent = "Choose a JSON file or paste JSON first.";
+              return;
+            }
+            status.textContent = "Importing pasted JSON…";
+            send({ type: "import-json", data });
+            return;
+          }
+          status.textContent = "Reading JSON file…";
+          send({ type: "import-json", data: JSON.parse(await file.text()) });
+        } catch (error) {
+          status.textContent = `Invalid JSON: ${error.message}`;
+        }
+      };
+      document.getElementById("cancel").onclick = () => send({ type: "cancel" });
+      onmessage = (event) => {
+        const message = event.data.pluginMessage;
+        if (message.type === "catalog-exported") {
+          const catalog = message.catalog;
+          downloadJson(catalog, "figma-system-design.json");
+          const tokens = catalog.tokens;
+          status.textContent = `Exported ${catalog.components.length} components, ${tokens.colors.variables.length + tokens.colors.styles.length} colors, ${tokens.typography.length} typography, ${tokens.spacing.length} spacing tokens.`;
+        }
+        if (message.type === "selection-exported") {
+          downloadJson(message.selection, "figma-selected-layer.json");
+          status.textContent = `Exported selected layer “${message.selection.layer.name}” and its descendants.`;
+        }
+        if (message.type === "selection-state") exportSelectionButton.disabled = !message.hasSelection;
+        if (message.type === "wireframe-generated") {
+          jsonInput.value = JSON.stringify(message.data, null, 2);
+          hasValidPastedJson = true;
+          jsonInput.classList.remove("invalid");
+          updateImportButton();
+          status.textContent = "JSON generated and validated. Importing into the canvas…";
+          send({ type: "import-json", data: message.data });
+          updateGenerateButton();
+        }
+        if (message.type === "import-complete") status.textContent = "Components and fallback nodes created on canvas.";
+        if (message.type === "error") {
+          status.textContent = `Error: ${message.message}`;
+          updateGenerateButton();
+        }
+      };
+    </script>
+  </body>
+</html>
